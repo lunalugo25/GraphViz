@@ -57,7 +57,7 @@ public struct DOTEncoder {
         lines.append(contentsOf: encode(graph.attributes, in: graph).map{ $0.indented(by: indentation) })
         lines.append(contentsOf: graph.subgraphs.map { encode($0, in: graph).indented(by: indentation) })
         lines.append(contentsOf: graph.nodes.compactMap { encode($0, in: graph)?.indented(by: indentation) })
-        lines.append(contentsOf: graph.edges.map { encode($0, in: graph).indented(by: indentation) })
+        lines.append(contentsOf: graph.edges.sorted().map { encode($0, in: graph).indented(by: indentation) })
 
         lines.append("}")
 
@@ -70,7 +70,7 @@ public struct DOTEncoder {
 
         lines.append(contentsOf: encode(subgraph.attributes, in: graph).map{ $0.indented(by: indentation) })
         lines.append(contentsOf: subgraph.nodes.compactMap { encode($0, in: graph)?.indented(by: indentation) })
-        lines.append(contentsOf: subgraph.edges.map { encode($0, in: graph).indented(by: indentation) })
+        lines.append(contentsOf: subgraph.edges.sorted().map { encode($0, in: graph).indented(by: indentation) })
 
         do {
             if lines.count < 2 {

@@ -450,3 +450,13 @@ extension Edge.Attributes {
         ).compactMapValues { $0 }
     }
 }
+
+extension Edge: Comparable {
+    public static func < (lhs: Edge, rhs: Edge) -> Bool {
+        if lhs.to != rhs.to {
+            return lhs.to < rhs.to
+        } else {
+            return lhs.from < rhs.from
+        }
+    }
+}

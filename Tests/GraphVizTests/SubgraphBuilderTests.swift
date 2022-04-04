@@ -25,5 +25,28 @@ final class SubgraphBuilderTests: XCTestCase {
 
         XCTAssertEqual(encoder.encode(subgraph, in: graph), expected)
     }
+
+    func testUnrepeatedSubgraphEdges() {
+        let subgraph = Subgraph {
+            "a" --> "b"
+            "a" --> "c"
+            "a" --> "d"
+            "a" --> "c"
+            "a" --> "d"
+            "a" --> "c"
+            "a" --> "b"
+        }.rank(.same)
+
+        let expected = """
+        subgraph {
+            rank=same
+            a -> b
+            a -> c
+            a -> d
+        }
+        """
+
+        XCTAssertEqual(encoder.encode(subgraph, in: graph), expected)
+    }
 }
 #endif

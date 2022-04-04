@@ -24,10 +24,10 @@ public struct Graph: Equatable {
     public private(set) var subgraphs: [Subgraph] = []
 
     /// Nodes contained by the graph.
-    public private(set) var nodes: [Node] = []
+    public private(set) var nodes: Set<Node> = .init()
 
     /// Edges contained by the graph.
-    public private(set) var edges: [Edge] = []
+    public private(set) var edges: Set<Edge> = .init()
 
     /**
      Returns whether the graph is empty.
@@ -56,22 +56,22 @@ public struct Graph: Equatable {
     }
 
     public mutating func append(_ node: Node) {
-        nodes.append(node)
+        nodes.insert(node)
     }
 
     public mutating func append<S>(contentsOf nodes: S) where S.Element == Node, S: Sequence {
         for node in nodes {
-            self.nodes.append(node)
+            self.nodes.insert(node)
         }
     }
 
     public mutating func append(_ edge:Edge) {
-        edges.append(edge)
+        edges.insert(edge)
     }
 
     public mutating func append<S>(contentsOf edges: S) where S.Element == Edge, S: Sequence {
         for edge in edges {
-            self.edges.append(edge)
+            self.edges.insert(edge)
         }
     }
 

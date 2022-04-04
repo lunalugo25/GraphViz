@@ -8,9 +8,9 @@ public struct Subgraph: Hashable {
         self.id = id
     }
 
-    public private(set) var nodes: [Node] = []
+    public private(set) var nodes: Set<Node> = .init()
 
-    public private(set) var edges: [Edge] = []
+    public private(set) var edges: Set<Edge> = .init()
 
     public private(set) var attributes: Attributes = Attributes()
 
@@ -29,11 +29,11 @@ public struct Subgraph: Hashable {
     }
 
     public mutating func append(_ node: @autoclosure () -> Node) {
-        nodes.append(node())
+        nodes.insert(node())
     }
 
     public mutating func append(_ edge: @autoclosure () -> Edge) {
-        edges.append(edge())
+        edges.insert(edge())
     }
 
     public subscript<T>(dynamicMember member: WritableKeyPath<Attributes, T>) -> T {
